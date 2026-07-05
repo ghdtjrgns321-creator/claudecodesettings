@@ -1,0 +1,45 @@
+# ── 화이트리스트 방식: 기본 전체 제외 → 올릴 것만 허용 (공개 안전) ──
+/*
+
+# 커밋할 설정 자산만 명시적으로 허용
+!/CLAUDE.md
+!/README.md
+!/settings.json
+!/.gitignore
+!/agents/
+!/skills/
+!/hooks/
+!/commands/
+!/rules/
+!/output-styles/
+!/scripts/
+!/docs/
+
+# ── 위 허용 폴더 안에서도 제외할 것 ──
+# 심링크 스킬(원본은 ~/.agents, 공개 시 깨진 링크) 제외
+/skills/grill-me
+/skills/grill-with-docs
+/skills/grilling
+/skills/playwright-cli
+/skills/playwright-explore-website
+
+# 백업·캐시·바이트코드 (어디에 있든)
+*.bak
+*.bak2
+*.bak3
+__pycache__/
+
+# 세션 내부 상태(계약 등) — 중첩 .claude 포함 (공개 금지)
+.claude/
+
+# 명시적 재확인 (혹시 위 허용에 걸려도 절대 커밋 금지)
+.credentials.json
+settings.local.json
+전역설정-체계.md
+history.jsonl
+/projects/
+/sessions/
+/memory/
+/agent-memory/
+/backups/
+/plugins/

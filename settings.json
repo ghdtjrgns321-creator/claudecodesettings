@@ -1,0 +1,125 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "WebFetch",
+      "WebSearch",
+      "Read",
+      "Grep",
+      "Glob"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/.ssh/*)",
+      "Read(**/credentials.json)",
+      "Read(**/.netrc)",
+      "Read(**/.gnupg/*)",
+      "Read(**/*.kdbx)"
+    ],
+    "ask": [],
+    "defaultMode": "auto"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/Users/ghdtj/.claude/hooks/guard_bash.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python /c/Users/ghdtj/.claude/hooks/post_write_check.py"
+          },
+          {
+            "type": "command",
+            "command": "python /c/Users/ghdtj/.claude/hooks/literal_lint.py"
+          },
+          {
+            "type": "command",
+            "command": "python /c/Users/ghdtj/.claude/hooks/md_table_format.py"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/Users/ghdtj/.claude/hooks/session_start_context.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/Users/ghdtj/.claude/hooks/work-summary-start.sh"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/Users/ghdtj/.claude/hooks/completion_discipline.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/Users/ghdtj/.claude/hooks/work-summary-end.sh"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/Users/ghdtj/.claude/hooks/completion_gate.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "python C:/Users/ghdtj/.claude/scripts/statusline.py"
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      }
+    }
+  },
+  "outputStyle": "default",
+  "effortLevel": "medium",
+  "autoUpdatesChannel": "latest",
+  "skipWorkflowUsageWarning": true,
+  "autoCompactEnabled": false,
+  "skipAutoPermissionPrompt": true
+}
