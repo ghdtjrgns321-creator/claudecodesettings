@@ -11,16 +11,20 @@ Claude Code(`~/.claude`)의 전역 설정을 관리하는 저장소.
 
 ## 문서 (docs/)
 
-| #   | 문서                                                | 내용                                              |
-| --- | --------------------------------------------------- | ------------------------------------------------- |
-| 1   | [overview](docs/01-overview.md)                     | 전체 생태계 구조 및 ASCII 다이어그램              |
-| 2   | [claude-md](docs/02-claude-md.md)                   | CLAUDE.md 구성 방식                               |
-| 3   | [skills](docs/03-skills.md)                         | 스킬 설명 + 트리거 방식                           |
-| 4   | [agents](docs/04-agents.md)                         | 에이전트 설명                                     |
-| 5   | [hooks](docs/05-hooks.md)                           | 훅 설명                                           |
-| 6   | [commands](docs/06-commands.md)                     | 슬래시 커맨드 관리                                |
-| 7   | [triggers-and-index](docs/07-triggers-and-index.md) | 트리거,목차 운영,git 관리                         |
-| 8   | [harness](docs/08-harness.md)                       | ⭐ 완료 계약 하네스 — 증거 없이 완료 못 하게 강제 |
+| #   | 문서                                                   | 내용                                                   |
+| --- | ------------------------------------------------------ | ------------------------------------------------------ |
+| 1   | [overview](docs/01-overview.md)                        | 전체 생태계 구조 및 ASCII 다이어그램                   |
+| 2   | [claude-md](docs/02-claude-md.md)                      | CLAUDE.md 구성 방식                                    |
+| 3   | [skills](docs/03-skills.md)                            | 스킬 설명 + 트리거 방식                                |
+| 4   | [agents](docs/04-agents.md)                            | 에이전트 설명                                          |
+| 5   | [hooks](docs/05-hooks.md)                              | 훅 설명                                                |
+| 6   | [commands](docs/06-commands.md)                        | 슬래시 커맨드 관리                                     |
+| 7   | [triggers-and-index](docs/07-triggers-and-index.md)    | 트리거,목차 운영,git 관리                              |
+| 8   | [harness](docs/08-harness.md)                          | ⭐ 하네스 개요 (4 서브시스템) — 훅으로 강제하는 자동화 |
+| 8a  | [completion-contract](docs/08a-completion-contract.md) | 완료 계약 — 증거 없이 완료 못 하게 강제                |
+| 8b  | [safety-guard](docs/08b-safety-guard.md)               | 안전 가드 — 위험 명령 차단                             |
+| 8c  | [integrity](docs/08c-integrity.md)                     | 무결성 — 인코딩·하드코딩·서식 자동 검사                |
+| 8d  | [continuity](docs/08d-continuity.md)                   | 연속성 — 세션 넘어 작업 이어주기                       |
 
 ## 현재 규모 (2026-07-05)
 
