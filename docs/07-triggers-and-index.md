@@ -1,6 +1,6 @@
 # 07. Triggers · Index · Git 관리
 
-## 트리거 방식 (네이티브)
+## 트리거 방식
 
 스킬·에이전트·커맨드가 뜨는 방식:
 
@@ -9,10 +9,6 @@
 | 스킬     | 각 `SKILL.md`의 `description`을 Claude가 매칭(자동)         |
 | 에이전트 | Claude가 필요 시 Task로 파견 / code-reviewer는 완료 후 자동 |
 | 커맨드   | 사용자가 `/이름` 직접 입력                                  |
-
-- **배선 파일 없음.** 과거 `skill-rules.json`(키워드→스킬 배선)은 이를 읽는 훅이 없어 무효 → 삭제.
-- 따라서 트리거 품질 = **description 품질**. 한국어 사용 스킬은 description에 한글 키워드를 박는다.
-- (선택) 자동 강제 트리거가 필요하면 UserPromptSubmit 훅으로 구현 가능하나, 현재는 네이티브로 충분.
 
 ## 목차(INDEX) 운영 방식
 
@@ -61,5 +57,3 @@ plugins/
 3) git add . → git status 로 .credentials.json·history.jsonl 미포함 확인
 4) 확인되면 첫 커밋 → remote 연결 → push (리포 private 권장)
 ```
-
-> ⚠️ `.credentials.json`(OAuth 토큰)·`history.jsonl`(대화 전체)가 루트에 있다. 3)의 확인 없이 push하면 유출.

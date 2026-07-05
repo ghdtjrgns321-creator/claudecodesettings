@@ -1,8 +1,5 @@
 # 05. Hooks — 훅
 
-훅 = 특정 이벤트에 **자동 실행되는 스크립트**. 지시(~80% 준수)와 달리 **100% 결정적**으로 동작.
-non-negotiable(시크릿·인코딩·완료검증)은 규칙이 아니라 훅으로 강제한다.
-
 ## 훅 10개
 
 | 훅                       | 이벤트                 | 기능                                                                          | 차단? |
@@ -22,12 +19,6 @@ non-negotiable(시크릿·인코딩·완료검증)은 규칙이 아니라 훅으
 
 사용 중: PreToolUse · PostToolUse · SessionStart · UserPromptSubmit · Stop (5종).
 미사용(선택 여지): Notification(유휴·권한 알림) · SubagentStop · PreCompact.
-
-## 우리가 평균보다 앞선 것
-
-- **completion_gate + contract_lint** — 완료를 "증거 기반"으로 강제하는 계약 게이트. 대다수 설정에 없음.
-- **mojibake 가드** — 한글 파일 인코딩 손상(U+FFFD·cp949) 하드 차단. 한글 사용자에 필수.
-- **work-summary** — 세션 간 작업 연속성 유지.
 
 ## 설계 문서
 
