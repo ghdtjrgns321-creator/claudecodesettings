@@ -3,12 +3,12 @@
 ## 생태계 구조
 
 ```
-~/.claude/   ← 전역 = 작업 규율 하네스 (모든 프로젝트 공통)
+~/.claude/   ← 전역
 │
 ├─ ◆ 핵심 규칙
 │   ├─ CLAUDE.md          … §0~§10, (84줄)
-│   ├─ rules/             … plan-mode-brainstorming.md
-│   └─ output-styles/     … teacher.md
+│   ├─ rules/             … 
+│   └─ output-styles/     … 
 │
 ├─ ◆ 고유 하네스 스킬 (2)   ripple-search · work-prompt-authoring
 │                          (핵심 하네스는 superpowers 플러그인이 제공 ↓)
@@ -51,3 +51,4 @@
 - CLAUDE.md 구성 → [02](02-claude-md.md)
 - 스킬 전수 → [03](03-skills.md) / 에이전트 → [04](04-agents.md) / 훅 → [05](05-hooks.md) / 커맨드 → [06](06-commands.md)
 - 트리거·목차·git → [07](07-triggers-and-index.md)
+- ⭐ 완료 계약 하네스 → [08](08-harness.md)

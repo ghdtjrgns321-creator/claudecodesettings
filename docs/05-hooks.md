@@ -20,9 +20,10 @@
 사용 중: PreToolUse · PostToolUse · SessionStart · UserPromptSubmit · Stop (5종).
 미사용(선택 여지): Notification(유휴·권한 알림) · SubagentStop · PreCompact.
 
-## 설계 문서
+## 완료 계약 하네스
 
-완료 게이트 상세: [`instruction-gate-design.md`](instruction-gate-design.md).
+`completion_discipline`·`completion_gate`·`contract_lint`가 함께 이루는 **완료 계약 하네스**는 별도 문서에서 상세히 다룬다 → **[08. 하네스](08-harness.md)** (증거 없이 완료 못 하게 강제하는 핵심 장치).
+설계 상세: [`instruction-gate-design.md`](instruction-gate-design.md).
 
 ## 배선
 
