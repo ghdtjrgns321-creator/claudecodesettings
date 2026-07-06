@@ -1,6 +1,6 @@
 # 05. Hooks — 훅
 
-## 훅 10개
+## 훅
 
 | 훅                       | 이벤트                 | 기능                                                                          | 차단? |
 | ------------------------ | ---------------------- | ----------------------------------------------------------------------------- | ----- |
@@ -22,7 +22,7 @@
 
 ## 완료 계약 하네스
 
-`completion_discipline`·`completion_gate`·`contract_lint`가 함께 이루는 **완료 계약 하네스**는 별도 문서에서 상세히 다룬다 → **[08. 하네스](08-harness.md)** (증거 없이 완료 못 하게 강제하는 핵심 장치).
+`completion_discipline`·`completion_gate`·`contract_lint`가 함께 이루는 **완료 계약 하네스**는 **[08. 하네스](08-harness.md)** 참고
 설계 상세: [`instruction-gate-design.md`](instruction-gate-design.md).
 
 ## 배선

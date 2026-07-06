@@ -1,13 +1,10 @@
-# 08. 하네스 (Harness) — 훅으로 강제되는 자동화
+# 08. 하네스 (Harness)
 
-> 이 저장소의 핵심. "규칙을 써두는 것"이 아니라 **훅으로 강제**하는 자동화 시스템.
-> 지시(CLAUDE.md)는 ~80%만 지켜지지만, **훅은 100% 결정적**이다. non-negotiable은 규칙이 아니라 게이트로 만든다.
-
-## 4개 서브시스템 (훅 10개)
+## 하네스 구성
 
 | 서브시스템          | 이벤트                                 | 훅                                                            | 하는 일                                                   | 상세                              |
 | ------------------- | -------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------- |
-| **A. 완료 계약** ⭐ | UserPromptSubmit · Stop                | completion_discipline · completion_gate · contract_lint       | 증거 없이 완료 못 하게 종료 차단                          | [08a](08a-completion-contract.md) |
+| **A. 완료 계약** (자체생성) | UserPromptSubmit · Stop                | completion_discipline · completion_gate · contract_lint       | 증거 없이 완료 못 하게 종료 차단                          | [08a](08a-completion-contract.md) |
 | **B. 안전 가드**    | PreToolUse:Bash                        | guard_bash                                                    | 위험 명령(rm -rf·force push·시크릿 읽기·글로벌 설치) 차단 | [08b](08b-safety-guard.md)        |
 | **C. 무결성**       | PostToolUse:Write\|Edit                | post_write_check · literal_lint · md_table_format             | 한글 인코딩 하드 차단 + 하드코딩 경고 + 표 정렬           | [08c](08c-integrity.md)           |
 | **D. 연속성**       | SessionStart · UserPromptSubmit · Stop | session_start_context · work-summary-start · work-summary-end | 세션 넘어 작업 맥락 이어주기                              | [08d](08d-continuity.md)          |
@@ -40,8 +37,8 @@
 | **자동 처리**  | md_table_format · post_write_check(ruff)                       | 저장 시 자동 정리                             |
 | **주입(soft)** | session_start_context · work-summary-* · completion_discipline | 컨텍스트에 맥락·규율을 넣어 압박·상기         |
 
-## 설계 철학
+## 설계 방식
 
 - **규칙 → 훅.** "매 턴 참이어야 하는 강제"는 CLAUDE.md가 아니라 훅. (매 턴 참 = CLAUDE.md / 가끔 절차 = 스킬 / 자동 스크립트 = 훅)
-- **A(완료 계약)가 가장 독창적** — 대다수 설정에 없는 "증거 기반 완료 강제". 깊게 보려면 → [08a](08a-completion-contract.md).
+- **A(완료 계약)은 직접 생성한 하네스임** — 증거 기반 완료 강제. 깊게 보려면 → [08a](08a-completion-contract.md).
 - 각 훅의 배선은 `settings.json`의 `hooks`에 이벤트별로 등록. 훅 목록 요약은 [05. hooks](05-hooks.md).
