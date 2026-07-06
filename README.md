@@ -25,6 +25,7 @@ Claude Code(`~/.claude`)의 전역 설정을 관리하는 저장소.
 | 8b  | [safety-guard](docs/08b-safety-guard.md)               | 안전 가드 — 위험 명령 차단                             |
 | 8c  | [integrity](docs/08c-integrity.md)                     | 무결성 — 인코딩·하드코딩·서식 자동 검사                |
 | 8d  | [continuity](docs/08d-continuity.md)                   | 연속성 — 세션 넘어 작업 이어주기                       |
+| 9   | [plugins](docs/09-plugins.md)                          | 플러그인 — superpowers 14스킬·LSP·트리거 방식          |
 
 ## 현재 규모 (2026-07-05)
 

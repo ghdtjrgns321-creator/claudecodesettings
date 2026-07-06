@@ -52,3 +52,4 @@
 - 스킬 전수 → [03](03-skills.md) / 에이전트 → [04](04-agents.md) / 훅 → [05](05-hooks.md) / 커맨드 → [06](06-commands.md)
 - 트리거·목차·git → [07](07-triggers-and-index.md)
 - ⭐ 완료 계약 하네스 → [08](08-harness.md)
+- 플러그인(superpowers 등) → [09](09-plugins.md)

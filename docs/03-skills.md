@@ -38,28 +38,9 @@
 
 ## 하네스는 플러그인이 제공 (superpowers)
 
-핵심 작업 규율은 **superpowers 플러그인**(Jesse Vincent/obra 제작, 외부 배포판)에 위임한다. 설치하면 `superpowers:*` 스킬 14개가 딸려 오고, 각자 `description`으로 자동 트리거된다. 유지보수는 제작자가 한다(우리가 안 만듦).
+핵심 작업 규율(TDD·디버깅·검증·계획·리뷰 등)은 위 12개와 별개로 **superpowers 플러그인**이 14개 스킬로 제공한다. 플러그인은 우리가 만드는 스킬이 아니라 외부 배포판이라 별도로 다룬다 → **[09. 플러그인](09-plugins.md)** (14개 스킬 표·트리거 방식 포함).
 
-**"어떻게 일할지"를 알려주는 14개 스킬:**
-
-| 단계   | 스킬                             | 역할 (언제 뜨나)                                                  |
-| ------ | -------------------------------- | ----------------------------------------------------------------- |
-| 설계   | `brainstorming`                  | 기능·컴포넌트 만들기 전 의도·요구·설계를 먼저 탐색 (창작 전 필수) |
-| 설계   | `writing-plans`                  | 스펙/요구가 있는 다단계 작업을 코드 전에 계획서로                 |
-| 설계   | `using-git-worktrees`            | 기능 작업 격리가 필요할 때 worktree로 독립 작업공간 확보          |
-| 구현   | `test-driven-development`        | 구현 코드 짜기 전 테스트부터 (RED-GREEN-REFACTOR)                 |
-| 구현   | `executing-plans`                | 작성된 계획을 별도 세션에서 리뷰 체크포인트와 함께 실행           |
-| 구현   | `subagent-driven-development`    | 독립 작업들을 현재 세션에서 서브에이전트로 실행                   |
-| 구현   | `dispatching-parallel-agents`    | 의존 없는 2+ 작업을 병렬 에이전트로 분산                          |
-| 검증   | `systematic-debugging`           | 버그·테스트 실패 시 고치기 전에 근본원인 체계적 진단              |
-| 검증   | `verification-before-completion` | "완료/통과" 주장 전에 검증 명령 실행·출력 확인 (증거 우선)        |
-| 리뷰   | `requesting-code-review`         | 작업 완료·주요 기능·머지 전 요구충족 검증 리뷰 요청               |
-| 리뷰   | `receiving-code-review`          | 리뷰 피드백 받을 때 맹목 수용 말고 기술적 검증 후 반영            |
-| 마무리 | `finishing-a-development-branch` | 구현·테스트 완료 후 머지/PR/정리 중 통합 방식 결정                |
-| 메타   | `using-superpowers`              | 대화 시작 시 스킬을 어떻게 찾아 쓰는지 확립                       |
-| 메타   | `writing-skills`                 | 새 스킬 작성·편집·배포 전 검증                                    |
-
-→ 우리가 옛날에 갖고 있던 tdd·systematic-debugging·verification 복사본은 이 플러그인과 겹쳐서 **삭제**했고, 이제 이 유지보수판을 쓴다.
+우리가 옛날에 갖고 있던 tdd·systematic-debugging·verification 복사본은 이 플러그인과 겹쳐서 **삭제**했고, 이제 유지보수판을 쓴다.
 
 ## 운영 규칙
 
