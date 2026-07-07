@@ -11,24 +11,24 @@ Claude Code(`~/.claude`)의 전역 설정을 관리하는 저장소.
 
 ## 문서 (docs/)
 
-| #   | 문서                                                | 내용                                 |
-| --- | --------------------------------------------------- | ------------------------------------ |
-| 1   | [overview](docs/01-overview.md)                     | 전체 구조                             |
-| 2   | [claude-md](docs/02-claude-md.md)                   | CLAUDE.md 구성 방식                  |
-| 3   | [skills](docs/03-skills.md)                         | 스킬 설명 + 트리거 방식              |
-| 4   | [agents](docs/04-agents.md)                         | 에이전트 설명                        |
-| 5   | [hooks](docs/05-hooks.md)                           | 훅 설명                              |
-| 6   | [commands](docs/06-commands.md)                     | 슬래시 커맨드 관리                   |
-| 7   | [triggers-and-index](docs/07-triggers-and-index.md) | 트리거,목차 운영,git 관리            |
-| 8   | [harness](docs/08-harness.md)                       | 하네스 관리                          |
-| 9   | [plugins](docs/09-plugins.md)                       | 플러그인 관리                        |
+| #   | 문서                                                | 내용                      |
+| --- | --------------------------------------------------- | ------------------------- |
+| 1   | [overview](docs/01-overview.md)                     | 전체 구조                 |
+| 2   | [claude-md](docs/02-claude-md.md)                   | CLAUDE.md 구성 방식       |
+| 3   | [skills](docs/03-skills.md)                         | 스킬 설명 + 트리거 방식   |
+| 4   | [agents](docs/04-agents.md)                         | 에이전트 설명             |
+| 5   | [hooks](docs/05-hooks.md)                           | 훅 설명                   |
+| 6   | [commands](docs/06-commands.md)                     | 슬래시 커맨드 관리        |
+| 7   | [triggers-and-index](docs/07-triggers-and-index.md) | 트리거,목차 운영,git 관리 |
+| 8   | [harness](docs/08-harness.md)                       | 하네스 관리               |
+| 9   | [plugins](docs/09-plugins.md)                       | 플러그인 관리             |
 
 ## 현재 규모 (2026-07-05)
 
 | 항목      | 수                            |
 | --------- | ----------------------------- |
 | CLAUDE.md | 84줄 (~2.1k 토큰)             |
-| 전역 스킬 | 12 (고유 2 + 도구 5 + 외부 5) |
+| 전역 스킬 | 13 (고유 3 + 도구 5 + 외부 5) |
 | 플러그인  | 4                             |
 | 에이전트  | 2                             |
 | 훅        | 10                            |
