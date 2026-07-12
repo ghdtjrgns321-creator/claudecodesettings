@@ -10,8 +10,10 @@
 │   ├─ rules/             … 
 │   └─ output-styles/     … 
 │
-├─ ◆ 고유 스킬 (2)   ripple-search · work-prompt-authoring
-│                          
+├─ ◆ 고유 스킬 (3)   ripple-search · work-prompt-authoring
+│                          diagram-driven-docs
+│
+├─ ◆ 자체생성 스킬 (1)   readme-maker
 │
 ├─ ◆ 범용 도구 스킬 (5)     find-skills · pdf · mermaid
 │                          frontend-design · web-design-guidelines
@@ -43,7 +45,7 @@
 
 | 층            | 담당                     | 예                                         |
 | ------------- | ------------------------ | ------------------------------------------ |
-| **CLAUDE.md** | 원칙(무엇을·왜)          | 핵심 설계 원칙 저장                            |
+| **CLAUDE.md** | 원칙(무엇을·왜)          | 핵심 설계 원칙 저장                        |
 | **훅**        | 강제(어떻게, 100% 강제)  | completion_gate가 미검증 완료 차단         |
 | **스킬**      | 방법(상세 절차)          | superpowers:verification-before-completion |
 | **에이전트**  | 위임(격리 실행)          | code-reviewer가 한국어 코드리뷰            |

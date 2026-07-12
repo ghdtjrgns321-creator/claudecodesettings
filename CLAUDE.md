@@ -65,10 +65,11 @@
 | 스키마·설정·리네임   | ripple-search (고유)                       |
 | 하청 프롬프트 작성   | work-prompt-authoring (고유)               |
 | 기술문서·README·설계 | diagram-driven-docs (고유)                 |
+| README 생성(인터뷰)  | readme-maker (자체생성)                    |
 | 코드 리뷰(완료 후)   | code-reviewer 에이전트 (한국어)            |
 | 대량 문서            | documentation-architect 에이전트 (수동)    |
 
-핵심 하네스는 **superpowers 플러그인**이 제공(유지보수판). 전역 고유 스킬은 ripple-search·work-prompt-authoring·diagram-driven-docs 3개.
+핵심 하네스는 **superpowers 플러그인**이 제공(유지보수판). 전역 고유 스킬은 ripple-search·work-prompt-authoring·diagram-driven-docs 3개 + 자체생성 readme-maker 1개.
 스킬은 각 `description` 매칭으로 자동 노출된다(별도 배선 파일 없음 — 트리거는 description 기반).
 
 ## 9. Decision Gating (사용자 승인 우선)
