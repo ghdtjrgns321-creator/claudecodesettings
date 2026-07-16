@@ -13,7 +13,6 @@ import argparse
 import fnmatch
 import json
 import re
-import subprocess
 import sys
 from pathlib import Path
 
@@ -127,6 +126,7 @@ EXCLUDE_DIRS = {
     ".codex",
     ".superpowers",
     "final-report",
+    "_workspace",  # 스킬 작업공간(readme 아웃라인 계약·감사 스크래치) — 보고서 뒤에 생겨 verify를 깨뜨림
 }
 EXCLUDE_FILES = {".env"}  # 시크릿 — 목록에도 올리지 않는다
 LARGE_BYTES = 200_000  # 이 크기 초과는 large=True (구조 정독 허용 표시)
@@ -147,39 +147,12 @@ def classify(p: Path) -> str | None:
     return "list_only"  # 미분류 확장자도 목록에는 남긴다 (조용한 누락 금지)
 
 
-def git_candidates(root: Path) -> list[Path] | None:
-    """git 저장소면 추적+미추적(gitignore 제외) 파일 목록을 반환. 아니면 None."""
-    if not (root / ".git").exists():
-        return None
-    try:
-        out = subprocess.run(
-            [
-                "git",
-                "-C",
-                str(root),
-                "ls-files",
-                "--cached",
-                "--others",
-                "--exclude-standard",
-            ],
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            check=True,
-        )
-    except (OSError, subprocess.CalledProcessError):
-        return None
-    return [root / line for line in out.stdout.splitlines() if line.strip()]
-
-
-def inventory(root: Path, extra_excludes: set[str], no_git: bool = False) -> dict:
-    """분모 N 고정. git 저장소는 git ls-files 기준(생성 데이터가 gitignore로 걸러짐),
-    비-git만 전체 순회로 폴백."""
+def inventory(root: Path, extra_excludes: set[str]) -> dict:
+    """분모 N 고정. 프로젝트 폴더 전체를 순회한다 — 커밋 추적 여부와 무관하게
+    모든 파일을 대상으로 삼는다(설계·데이터 문서가 커밋에서 제외돼 있어도 빠뜨리지 않기 위함).
+    EXCLUDE_DIRS 기본 제외 + --exclude로 지정한 디렉토리만 건너뛴다."""
     skip = EXCLUDE_DIRS | {d.lower() for d in extra_excludes}
-    candidates = None if no_git else git_candidates(root)
-    mode = "walk" if candidates is None else "git"
-    if candidates is None:
-        candidates = sorted(root.rglob("*"))
+    candidates = sorted(root.rglob("*"))
     read_files, list_only = [], []
     excluded_dirs_hit = {}  # 기본·추가 제외로 걸러진 파일 수 (조용한 제외 방지용 집계)
     for p in candidates:
@@ -203,7 +176,7 @@ def inventory(root: Path, extra_excludes: set[str], no_git: bool = False) -> dic
         (list_only if kind == "list_only" else read_files).append(entry)
     return {
         "root": str(root),
-        "mode": mode,
+        "mode": "walk",
         "n_read": len(read_files),
         "n_list_only": len(list_only),
         "excluded_dirs": excluded_dirs_hit,
@@ -213,40 +186,55 @@ def inventory(root: Path, extra_excludes: set[str], no_git: bool = False) -> dic
 
 
 def cmd_inventory(args) -> int:
-    inv = inventory(args.root, set(args.exclude), args.no_git)
+    inv = inventory(args.root, set(args.exclude))
     by_kind = {}
     for f in inv["read_files"]:
         by_kind[f["kind"]] = by_kind.get(f["kind"], 0) + 1
-    print(f"수집 모드 = {inv['mode']}")
+    print("수집 모드 = 전체 순회(프로젝트 폴더 — 커밋 제외분 포함)")
     if inv["excluded_dirs"]:
         detail = ", ".join(f"{d} {n}" for d, n in sorted(inv["excluded_dirs"].items()))
-        print(
-            f"제외 디렉토리로 걸러진 파일 = {sum(inv['excluded_dirs'].values())}  ({detail})"
-        )
+        print(f"제외 디렉토리로 걸러진 파일 = {sum(inv['excluded_dirs'].values())}  ({detail})")
     print(
         f"정독 분모 N = {inv['n_read']}  ({', '.join(f'{k} {v}' for k, v in sorted(by_kind.items()))})"
     )
     print(f"목록만(정독 면제) = {inv['n_list_only']}")
     if args.out:
-        Path(args.out).write_text(
-            json.dumps(inv, ensure_ascii=False, indent=1), encoding="utf-8"
-        )
+        Path(args.out).write_text(json.dumps(inv, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"인벤토리 저장: {args.out}")
     else:
         print(json.dumps(inv, ensure_ascii=False, indent=1))
     return 0
 
 
+# 커버리지 표의 "전부 매칭" 글롭(맨 `*`·`**`·`?*` 등)은 모든 파일을 덮어 N/N 증명을
+# 무력화한다(hollow-PASS). 서로 무관한 프로브를 전부 매칭하면 catch-all로 판정해 거부한다.
+# `data/**`·`*.md`·`*backup.md` 같은 타깃 글롭은 최소 한 프로브에서 어긋나므로 통과.
+_CATCH_ALL_PROBES = ("a", "z/y/x.ext", "readme", "foo.bar", "1", "no_ext_file")
+
+
+def _is_catch_all(glob: str) -> bool:
+    return all(fnmatch.fnmatch(p, glob) for p in _CATCH_ALL_PROBES)
+
+
 def cmd_verify(args) -> int:
-    inv = inventory(args.root, set(args.exclude), args.no_git)
+    inv = inventory(args.root, set(args.exclude))
     text = Path(args.coverage_md).read_text(encoding="utf-8")
     # 코드펜스 내부는 경로 파싱에서 제외 — 펜스 백틱이 인라인 백틱 짝을 깨뜨리는 것 방지
     text = re.sub(r"```.*?```", "", text, flags=re.DOTALL)
+    # 접두 "./"만 제거 — lstrip은 문자 집합 제거라 `.gitignore` 같은 루트 dotfile을 훼손한다
     tokens = {
-        m.replace("\\", "/").lstrip("./").casefold()
+        re.sub(r"^(\./)+", "", m.replace("\\", "/")).casefold()
         for m in re.findall(r"`([^`]+)`", text)
     }
     globs = {t for t in tokens if "*" in t}  # 디렉토리 단위 커버: `data/**` 표기
+    catch_all = sorted(g for g in globs if _is_catch_all(g))
+    if catch_all:
+        print(
+            f"FAIL — 전부 매칭 글롭 발견: {catch_all}. "
+            "이 토큰이 모든 파일을 덮어 N/N 증명을 무력화한다(hollow-PASS). "
+            "커버리지 표에서 제거하고 대상 파일을 실제로 매핑하라."
+        )
+        return 2
     exact = tokens - globs
     required = {f["path"]: f["path"].casefold() for f in inv["read_files"]}
     missing = [
@@ -254,9 +242,7 @@ def cmd_verify(args) -> int:
         for orig, folded in required.items()
         if folded not in exact and not any(fnmatch.fnmatch(folded, g) for g in globs)
     ]
-    print(
-        f"인벤토리 N = {len(required)}, 커버리지 표 경로 = {len(exact)} + 글롭 {len(globs)}"
-    )
+    print(f"인벤토리 N = {len(required)}, 커버리지 표 경로 = {len(exact)} + 글롭 {len(globs)}")
     if missing:
         print(f"FAIL — 누락 {len(missing)}/{len(required)}건:")
         for m in missing:
@@ -275,16 +261,10 @@ def main() -> int:
     p_inv.add_argument("root", type=Path)
     p_inv.add_argument("--out")
     p_inv.add_argument("--exclude", action="append", default=[])
-    p_inv.add_argument(
-        "--no-git", action="store_true", help="git 저장소여도 전체 순회로 강제"
-    )
     p_ver = sub.add_parser("verify")
     p_ver.add_argument("root", type=Path)
     p_ver.add_argument("coverage_md")
     p_ver.add_argument("--exclude", action="append", default=[])
-    p_ver.add_argument(
-        "--no-git", action="store_true", help="git 저장소여도 전체 순회로 강제"
-    )
     args = ap.parse_args()
     if not args.root.is_dir():
         print(f"에러: 디렉토리 아님 — {args.root}")

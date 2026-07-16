@@ -32,11 +32,6 @@ __pycache__/
 # 세션 내부 상태(계약 등) — 중첩 .claude 포함 (공개 금지)
 .claude/
 
-# humanize 관련 로컬 스킬 (공개 금지 — 로컬 전용)
-/skills/humanize
-/skills/humanize-korean
-/skills/humanize-redo
-
 # agents: 우리 소유 2개 + README만 허용 (플러그인 주입 에이전트 공개 금지)
 /agents/*
 !/agents/code-reviewer.md

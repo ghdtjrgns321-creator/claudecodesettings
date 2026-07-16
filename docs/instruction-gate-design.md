@@ -1,12 +1,8 @@
-# 지시 강제 게이트 — 상세 설계서 (v1 · 레거시)
+# 지시 강제 게이트 — 상세 설계서 (구버전)
 
-> ⚠️ **2026-07-16 재설계로 대체됨.** 이 문서가 설계한 v1(completion_discipline 매 턴 주입 + contract_lint 문장 심사)은
-> "작문 시험" 왕복(게이트 차단 835건/84세션)과 오차단·미검출 문제로 퇴역했다.
-> 현행 v2(VERIFY 실행형 게이트) → [08a-completion-contract.md](08a-completion-contract.md), 근거 데이터 → [2026-07-16-redesign.md](2026-07-16-redesign.md).
-> 아래는 이력 보존용 원문.
+> 이 설계는 더 이상 쓰이지 않는다. 현행 게이트 → [08a-completion-contract.md](08a-completion-contract.md)
 
 > 목적: "전역 문서를 갱신해도 안 지켜진다"는 문제를, 권고(CLAUDE.md)가 아니라 **결정론 훅**으로 강제한다.
-> 상태: ~~설계 동결(구현 직전)~~ → 구현·운영 후 2026-07-16 퇴역.
 
 ---
 
