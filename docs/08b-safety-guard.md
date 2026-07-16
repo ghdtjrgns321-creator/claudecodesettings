@@ -5,7 +5,9 @@
 
 ## 원리
 
-Claude가 Bash 도구를 호출하면, 실행되기 **전에** `guard_bash.sh`가 명령을 검사한다. 위험 패턴이면 `exit 2`(차단) + stderr로 사유를 Claude에 전달 → 명령이 실행되지 않는다. PowerShell 대소문자 무시(`nocasematch`)로 PS 변형도 잡는다.
+- Claude가 Bash 도구를 호출하면, 실행되기 **전에** `guard_bash.sh`가 명령을 검사
+- 위험 패턴이면 `exit 2`(차단) + stderr로 사유를 Claude에 전달 → 명령이 실행되지 않는다.
+- PowerShell 대소문자 무시(`nocasematch`)로 PS 변형도 잡는다.
 
 ## 차단하는 것
 

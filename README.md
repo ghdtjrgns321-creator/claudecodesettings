@@ -30,7 +30,6 @@ Claude Code(`~/.claude`)의 전역 설정을 관리하는 저장소
 | 7   | [triggers-and-index](docs/07-triggers-and-index.md) | 트리거,목차 운영,git 관리   |
 | 8   | [harness](docs/08-harness.md)                       | 하네스 관리                 |
 | 9   | [plugins](docs/09-plugins.md)                       | 플러그인 관리               |
-| —   | [2026-07-16-redesign](docs/2026-07-16-redesign.md)  | 재설계 근거 데이터·복원경로 |
 
 ## 현재 규모 (2026-07-16)
 

@@ -1,16 +1,4 @@
-# 03. Skills — 스킬 설명 + 트리거
-
-## 트리거는 어떻게 작동하나
-
-스킬은 각 `SKILL.md`의 **`description`을 Claude가 보고 자동으로 띄운다**. 별도 배선 파일 없음.
-
-- 한국어로 부르는 스킬은 description에 **실제 말버릇 그대로** 한글 트리거를 박는다 (예: systematic-debugging → "에러났어", "두더지잡기").
-- description은 **"언제 쓰는지"만** 쓴다. 절차를 요약하면 트리거 정확도가 떨어진다 → [writing-skills](../skills/writing-skills/SKILL.md)
-- 스킬이 적을수록 매칭 정확도↑ → 전역 19개로 슬림 유지.
-
-## 분류 기준
-
-**출처** — 이 저장소가 소유·유지보수하는가, 아니면 남의 것이라 원격 업데이트에 덮이는가. 용도별 검색은 목차가 아니라 description 자동 트리거가 한다.
+# 03. Skills 
 
 ## 직접 제작 (9)
 
@@ -26,12 +14,11 @@
 | systematic-debugging  | 원인 조사 없이 수정 금지·3회 실패 시 구조 의심               | "에러났어", "왜 이래", "두더지잡기"    |
 | writing-skills        | 스킬 작성·description 트리거 설계·서브에이전트 시험          | "스킬 만들어줘", "스킬이 안 뜬다"      |
 
-- census는 완료 계약의 `VERIFY:` 줄과 결합한다 → [08a](08a-completion-contract.md)
-- brainstorming·systematic-debugging·writing-skills는 superpowers 6.1.1에서 발췌해 의례를 덜어내고 재작성했다(각 SKILL.md 상단에 출처 표기).
+- brainstorming·systematic-debugging·writing-skills는 superpowers 6.1.1에서 발췌해 의례를 덜어내고 재작성
 
 ## 외부 (10)
 
-### 범용 도구 (5) — Anthropic 배포
+### Anthropic 배포 (5)
 
 | 스킬                  | 역할                  | 트리거 예              |
 | --------------------- | --------------------- | ---------------------- |
@@ -41,7 +28,7 @@
 | frontend-design       | 고품질 프론트 UI 생성 | "UI 만들어"            |
 | web-design-guidelines | UI 접근성·UX 리뷰     | "UI 리뷰해"            |
 
-### 심링크 (5) — `~/.agents/skills` 원본, repo 제외
+### 외부제작 스킬 적용 (5)
 
 | 스킬                       | 역할                                   |
 | -------------------------- | -------------------------------------- |
@@ -55,13 +42,10 @@
 
 | 플러그인                                                   | 제공 스킬            | 상태                         |
 | ---------------------------------------------------------- | -------------------- | ---------------------------- |
-| [superpowers](https://github.com/obra/superpowers)         | 14 (`superpowers:*`) | 비활성 → [09](09-plugins.md) |
 | [harness](https://github.com/revfactory/harness)           | 1 (`harness`)        | 활성                         |
 | [humanize-korean](https://github.com/epoko77-ai/im-not-ai) | 3 + 에이전트 10      | 활성 — 한글 윤문             |
 
 ## 운영 규칙
 
-- 스킬 추가·삭제·이동 시 `skills/README.md` 목차를 같은 작업에서 갱신.
-- 새 스킬을 전역에 두기 전 기존 스킬·플러그인과 역할 겹침 확인 — 겹치면 전역에 두지 않는다.
-- 플러그인이 제공하는 스킬을 로컬에 복사해 두지 않는다(트리거가 갈린다).
-- 외부 스킬을 발췌·재작성해 들여올 땐 SKILL.md 상단에 출처를 표기한다.
+- 스킬 추가·삭제·이동 시 `skills/README.md` 목차를 같은 작업에서 갱신
+- 새 스킬을 전역에 두기 전 기존 스킬·플러그인과 역할 겹침 확인
