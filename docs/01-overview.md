@@ -10,14 +10,11 @@
 │   ├─ rules/             … plan 모드 규칙
 │   └─ output-styles/     …
 │
-├─ ◆ 고유 스킬 (3)         ripple-search · work-prompt-authoring
-│                          diagram-driven-docs
+├─ ◆ 직접 제작 스킬 (9)    ripple-search · work-prompt-authoring · diagram-driven-docs
+│                          readme-maker · final-report · census
+│                          brainstorming · systematic-debugging · writing-skills
 │
-├─ ◆ 자체생성 스킬 (3)     readme-maker · final-report · census
-│
-├─ ◆ 설계·디버깅 스킬 (3)  brainstorming · systematic-debugging · writing-skills
-│
-├─ ◆ 범용 도구 스킬 (5)    find-skills · pdf · mermaid
+├─ ◆ 외부 도구 스킬 (5)    find-skills · pdf · mermaid
 │                          frontend-design · web-design-guidelines
 │
 ├─ ◆ 에이전트 (2)          code-reviewer · documentation-architect
@@ -29,8 +26,9 @@
 │
 └─ ↩ skills/*@ (5)         grill×3 · playwright×2 → ~/.agents/skills/  [외부, repo 제외]
 
-  ◆ 플러그인 (5 설치)
-     superpowers                … 비활성 (재활성은 settings.json 한 줄)
+     스킬 19 = 직접 제작 9 + 외부 10(도구 5 + 심링크 5)
+
+  ◆ 플러그인 (4 활성)
      harness                    … 에이전트 팀 스캐폴딩
      humanize-korean@im-not-ai  … 한글 윤문 (settings.local.json에서 활성)
      pyright-lsp / rust-analyzer-lsp   LSP   Python·Rust 코드 인텔리전스

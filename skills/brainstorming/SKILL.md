@@ -5,6 +5,8 @@ description: Use before building a feature, component, or system whose shape isn
 
 # Brainstorming — 코드 전에 가정을 좁힌다
 
+> superpowers 6.1.1에서 발췌·재작성 (의례 제거)
+
 목적: 잘못된 걸 빠르게 만드는 대신, 만들 것을 먼저 맞춘다.
 
 **핵심 원칙: 상세도는 복잡도에 비례한다.** 간단한 건 몇 문장이면 설계 끝이다. 이 스킬은 의례가 아니다 — 단계를 채우는 게 목적이 아니라 모호함을 없애는 게 목적이다.

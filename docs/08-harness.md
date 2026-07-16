@@ -2,12 +2,12 @@
 
 ## 하네스 구성
 
-| 서브시스템                  | 이벤트                  | 훅                                 | 하는 일                                                   | 상세                              |
-| --------------------------- | ----------------------- | ---------------------------------- | --------------------------------------------------------- | --------------------------------- |
-| **A. 완료 계약** (자체생성) | Stop                    | completion_gate                    | 미체크 [ ] 차단 + VERIFY 명령 직접 실행으로 실체 검증     | [08a](08a-completion-contract.md) |
-| **B. 안전 가드**            | PreToolUse:Bash         | guard_bash                         | 위험 명령(rm -rf·force push·시크릿 읽기·글로벌 설치) 차단 | [08b](08b-safety-guard.md)        |
-| **C. 무결성**               | PostToolUse:Write\|Edit | post_write_check · md_table_format | 한글 인코딩 하드 차단 + ruff + 표 정렬                    | [08c](08c-integrity.md)           |
-| **D. 연속성**               | SessionStart            | session_start_context              | 세션 시작 시 작업 맥락 주입 (1회)                         | [08d](08d-continuity.md)          |
+| 서브시스템                   | 이벤트                  | 훅                                 | 하는 일                                                   | 상세                              |
+| ---------------------------- | ----------------------- | ---------------------------------- | --------------------------------------------------------- | --------------------------------- |
+| **A. 완료 계약** (직접 제작) | Stop                    | completion_gate                    | 미체크 [ ] 차단 + VERIFY 명령 직접 실행으로 실체 검증     | [08a](08a-completion-contract.md) |
+| **B. 안전 가드**             | PreToolUse:Bash         | guard_bash                         | 위험 명령(rm -rf·force push·시크릿 읽기·글로벌 설치) 차단 | [08b](08b-safety-guard.md)        |
+| **C. 무결성**                | PostToolUse:Write\|Edit | post_write_check · md_table_format | 한글 인코딩 하드 차단 + ruff + 표 정렬                    | [08c](08c-integrity.md)           |
+| **D. 연속성**                | SessionStart            | session_start_context              | 세션 시작 시 작업 맥락 주입 (1회)                         | [08d](08d-continuity.md)          |
 
 ## 이벤트별 배치
 

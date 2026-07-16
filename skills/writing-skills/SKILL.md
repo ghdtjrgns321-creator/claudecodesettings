@@ -5,6 +5,8 @@ description: Use when creating a new skill, editing an existing skill, or verify
 
 # Writing Skills — 스킬은 산문이 아니라 행동을 바꾸는 코드다
 
+> superpowers 6.1.1에서 발췌·재작성 (의례 제거)
+
 **핵심 원칙: 스킬 없이 에이전트가 실패하는 걸 못 봤으면, 그 스킬이 옳은 걸 가르치는지 모른다.**
 
 스킬은 "내가 한 번 이렇게 풀었다"는 서사가 아니다. 재사용 가능한 기법·패턴·참조다.

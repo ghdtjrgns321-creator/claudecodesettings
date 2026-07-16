@@ -5,6 +5,8 @@ description: Use when encountering any bug, test failure, or unexpected behavior
 
 # Systematic Debugging — 원인 없이 고치지 않는다
 
+> superpowers 6.1.1에서 발췌·재작성 (의례 제거)
+
 무작위 수정은 시간을 태우고 새 버그를 만든다. 임시방편은 진짜 문제를 가린다.
 
 **철칙: 근본 원인을 찾기 전에 수정하지 않는다.** 증상 수정은 실패다.
