@@ -1,11 +1,11 @@
 # 08d. 연속성 하네스 (세션을 넘어 작업 이어주기)
 
-> 세션이 끊겨도 다음 세션이 작업상황을 알게 한다. 컨텍스트가 날아가도 작업이 이어진다.
+> 세션이 끊겨도 다음 세션이 작업상황을 알게 한다.
 > ← [08. 하네스 개요](08-harness.md)
+> 2026-07-16 재설계: work-summary-{start,end} 2훅 퇴역 — 751세션 동안 산출물 1개(사용률 사실상 0),
+> start는 매 턴 주입 세금. 연속성은 ①세션 시작 주입 + ②Claude Code 자동 메모리가 맡는다.
 
-3개 훅이 세션의 시작·매 턴·종료에 각각 맥락을 주입/기록한다.
-
-## ① session_start_context.sh — 시작 시 프로젝트 상태 주입 (SessionStart)
+## ① session_start_context.sh — 시작 시 프로젝트 상태 주입 (SessionStart, 1회)
 
 세션이 시작되면 현재 프로젝트의 상태를 컨텍스트에 넣어준다:
 
@@ -14,33 +14,17 @@
 - **진행 중 작업**: `docs/TASKS.md` 등에서 "진행 중"·🔄·⏳ 마커 grep
 - 4000자 캡(UTF-8 안전 컷)
 
-→ 새 세션을 열자마자 프로젝트의 상태를 자동으로 파악.
+→ 새 세션을 열자마자 프로젝트의 상태를 자동으로 파악. **매 턴이 아니라 1회만** 주입한다.
 
-## ② work-summary-start.sh — 매 턴 이전 요약 주입 (UserPromptSubmit)
+## ② Claude Code 자동 메모리 (훅 아님)
 
-프롬프트를 넣을 때마다 **이전 세션 작업 요약**을 주입:
-
-- 파일: `~/.claude/work-summaries/{프로젝트명}.md` (프로젝트명 = cwd의 basename)
-- 없으면 조용히 통과(첫 세션)
-
-→ 컨텍스트가 압축·리셋돼도 작업 상황이 매 턴 상기됨.
-
-## ③ work-summary-end.sh — 종료 시 요약 자동 기록 (Stop)
-
-세션 종료 시 요약 파일을 **자동으로 갱신**:
-
-- 트랜스크립트(JSONL)를 직접 파싱해 이번 세션에 Write/Edit한 **파일 목록**을 추출
-- 요약 파일의 "현재 작업 내용" 섹션만 교체(나머지 보존), 없으면 골격 생성
-- `stop_hook_active` 가드로 무한루프 방지
-- **Claude에 의존 안 함** — bash+python이 직접 파일을 씀(승인 불필요)
+`~/.claude/projects/<프로젝트>/memory/` — Claude가 세션을 넘어 유지하는 파일 기반 메모리.
+프로젝트 결정·사용자 피드백을 Claude가 직접 기록/회수한다. 하네스 재설계 이력도 여기 기록됨.
 
 ## 흐름
 
 ```
-세션 시작 ─ session_start_context ─→ git·디버깅·작업 상태 주입
-매 턴    ─ work-summary-start ─────→ 이전 요약 주입 (연속성)
-세션 종료 ─ work-summary-end ──────→ 수정 파일 목록으로 요약 갱신
-                                        │
-                                        ▼
-              ~/.claude/work-summaries/{project}.md  (다음 세션이 ①②로 읽음)
+세션 시작 ─ session_start_context ─→ git·디버깅·작업 상태 주입 (1회)
+세션 중   ─ (주입 없음 — 매 턴 훅은 의도적으로 제거)
+세션 종료 ─ completion_gate v2 ────→ 계약 잔여·VERIFY 검사 (연속성 아님, 08a)
 ```
